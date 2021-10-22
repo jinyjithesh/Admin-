@@ -3,12 +3,16 @@ import { useHistory } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import "./Login.css";
 import { useImmer } from "use-immer";
-
+import {
+  Route,
+  BrowserRouter as Router,
+  Switch,
+  BrowserRouter,
+} from "react-router-dom";
+import { AdminLayout } from "../Layout/AdminLayout";
 export const Login = () => {
-  const [user, setUser] = useState();
-
   const history = useHistory();
-  const { state, onLogin } = useAuth();
+  const { state, onLogin, user } = useAuth();
   const [localState, setlocalState] = useImmer({
     username: "",
     password: "",
@@ -31,7 +35,23 @@ export const Login = () => {
       history.push("/");
     }
   }, [state.isSuccess]);
-
+  if (user) {
+    return (
+      <div>
+        <BrowserRouter>
+          <div>
+            <Router>
+              <Switch>
+                <Route exact path="/">
+                  <AdminLayout />
+                </Route>
+              </Switch>
+            </Router>
+          </div>
+        </BrowserRouter>
+      </div>
+    );
+  }
   return (
     <div className="loginParentDiv">
       <h1>Login</h1>

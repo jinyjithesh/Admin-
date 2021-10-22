@@ -10,6 +10,7 @@ export const useAuth = () => {
     isSuccess: false,
   });
   const [user, setUser] = useState();
+  console.log("dd", user);
   const history = useHistory();
   const onLogout = (e) => {
     e.preventDefault();
@@ -32,10 +33,9 @@ export const useAuth = () => {
 
         if (res.status === 200) {
           console.log("login");
-          console.log("3", res);
+          console.log("3", res.data.user);
           setUserLocalStorage(res.data.token, res.data.user);
           setUser(res.data);
-
           setState((draft) => {
             draft.isBusy = false;
             draft.isSuccess = true;
@@ -56,9 +56,10 @@ export const useAuth = () => {
       });
   };
 
-  return { state, onLogin, onLogout, user, setState };
+  return { state, onLogin, onLogout, user, setState, setUser };
 };
 export const setUserLocalStorage = (token, user) => {
+  console.log("222", user);
   localStorage.setItem("token", token);
   localStorage.setItem("user", JSON.stringify(user));
 };
