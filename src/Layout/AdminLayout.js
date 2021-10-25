@@ -8,7 +8,10 @@ import { Sidebar } from "../Components/Sidebar";
 export const AdminLayout = () => {
   return (
     <div>
-      <Content />
+      <Header />
+      <div>
+        <Content />
+      </div>
     </div>
   );
 };
