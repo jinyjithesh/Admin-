@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import { useImmer } from "use-immer";
 
 export const useAuth = () => {
+  const [loading, setLoading] = useState(false);
   const [state, setState] = useImmer({
     isBusy: false,
     message: "",
@@ -56,7 +57,16 @@ export const useAuth = () => {
       });
   };
 
-  return { state, onLogin, onLogout, user, setState, setUser };
+  return {
+    state,
+    onLogin,
+    onLogout,
+    user,
+    setState,
+    setUser,
+    loading,
+    setLoading,
+  };
 };
 export const setUserLocalStorage = (token, user) => {
   console.log("222", user);

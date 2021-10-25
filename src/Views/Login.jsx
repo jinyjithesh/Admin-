@@ -10,6 +10,7 @@ import {
   BrowserRouter,
 } from "react-router-dom";
 import { AdminLayout } from "../Layout/AdminLayout";
+import { StaffList } from "./Staff/StaffList";
 export const Login = () => {
   const history = useHistory();
   const { state, onLogin, user } = useAuth();
@@ -35,7 +36,7 @@ export const Login = () => {
       history.push("/");
     }
   }, [state.isSuccess]);
-  if (user) {
+  if (localStorage.getItem("token")) {
     return (
       <div>
         <BrowserRouter>
